@@ -4,10 +4,14 @@
 
 def verify_card_number(card_number):
     sum_of_odd_digits = 0
+    # reverse card number
     card_number_reversed = card_number[::-1]
+
+    # get only the odd digits
     odd_digits = card_number_reversed[::2]
 
     for digit in odd_digits:
+        # sum up all odd digits
         sum_of_odd_digits += int(digit)
 
     sum_of_even_digits = 0
@@ -18,15 +22,19 @@ def verify_card_number(card_number):
         if number >= 10:
             number = (number // 10) + (number % 10)
         sum_of_even_digits += number
+    
     total = sum_of_odd_digits + sum_of_even_digits
-    print(total)
+
+    # If total is divisible by then, then valid otherwise invalid
     return total % 10 == 0
 
 def main():
     card_number = '4111-1111-4555-1141'
+    # remove any spaces or dash
     card_translation = str.maketrans({'-': '', ' ': ''})
     translated_card_number = card_number.translate(card_translation)
 
+    # call the function of verify card number below
     if verify_card_number(translated_card_number):
         print('VALID!')
     else:
